@@ -1,0 +1,57 @@
+.login{
+  height: 100vh !important;
+  background: #ecd9ff !important;
+  overflow-y: hidden;
+}
+
+.circle{
+  width: 1200px;
+  height: 1200px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #723297, #ecd9ff);
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translate(-30%, -30%);
+}
+
+.login-content-container{
+  margin: 120px auto;
+  z-index: 2 !important;
+  position: relative;
+  text-align: left !important;
+}
+
+.login-content{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.login-content h1{
+  color: #4e2474 !important;
+  font-size: 12em !important;
+  font-family: 'Yuji Syuku' !important;
+  margin: 0 20px !important;
+  line-height: 1 !important;
+  min-height: 100%;
+  vertical-align: middle;
+  transform: translateY(-15px);
+}
+.login-content i{
+  color: #3d1f57 !important;
+  font-size: 12em !important;
+  line-height: 1;
+}
+
+.login-btn{
+  margin-left: 100px !important;
+}
+
+.btn-icon{
+  background: #d8bdee !important;
+}
+.btn-label{
+  color: #3d1f57 !important;
+}

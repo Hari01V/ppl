@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import 'semantic-ui-css/semantic.min.css';
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
