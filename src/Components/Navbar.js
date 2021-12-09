@@ -20,11 +20,11 @@ const Navbar = () => {
 
   return (
     <Container className="navbar">
-      <a href="/">
+      <Link to="/">
         <span className="logo">
           <Icon name='playstation' size='huge' color='purple' />
         </span>
-      </a>
+      </Link>
       <ul className="navbar-list">
         <li className="navbar-list-item">
           <Link to="/">People</Link>
