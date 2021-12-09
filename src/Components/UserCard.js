@@ -1,13 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Card, Icon, Image, Button } from 'semantic-ui-react';
 
 import '../styles/UserCard.css';
 
 const UserCard = (props) => {
-  const { data, saveUser } = props;
+  const { data, saveUser, showMore } = props;
 
-  const { picture, name, email, phone, location } = data;
+  const { picture, name, email, phone, location, dob } = data;
+  const { latitude, longitude } = location['coordinates'];
 
   const getAddress = () => {
     return location ?
@@ -23,6 +24,10 @@ const UserCard = (props) => {
     }
   }
 
+  const getDate = (date) => {
+    return `${date.slice(0, 4)}-${date.slice(5, 7)}-${date.slice(8, 10)}`;
+  }
+
   return (
     <Card className="usercard">
       <Image src={picture && picture.large} wrapped ui={false} />
@@ -32,11 +37,24 @@ const UserCard = (props) => {
         <Card.Description>
           {getAddress()}
           <br></br>
-          <br></br>
+          {showMore &&
+            <>
+              {`DOB: ${getDate(dob.date)}`}
+              < br ></br>
+            </>
+          }
           Contact: {phone}
+          {showMore &&
+            <>
+              < br ></br>
+              {`Lat: ${latitude} | Lon: ${longitude}`}
+              < br ></br>
+            </>
+          }
         </Card.Description>
       </Card.Content>
-      {saveUser &&
+      {
+        saveUser &&
         <Card.Content extra className="save-btn-container">
           <Button fluid
             onClick={handleSave}
@@ -45,7 +63,7 @@ const UserCard = (props) => {
           </Button>
         </Card.Content>
       }
-    </Card>
+    </Card >
   )
 }
 

@@ -11,3 +11,13 @@
   justify-content: center;
   margin: 0 auto !important;
 }
+
+.show-more-container{
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto !important;
+}
+.show-more-container h4{
+  margin: 0 20px !important;
+}

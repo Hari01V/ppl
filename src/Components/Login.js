@@ -20,7 +20,7 @@ const Login = (props) => {
       </div>
       <Container textAlign='center' className="login-content-container">
         <div className="login-content">
-          <Icon name="playstation" size="massize" />
+          <Icon name="playstation" size="massive" />
           <Header as="h1">PPL</Header>
         </div>
         <Button as='div'

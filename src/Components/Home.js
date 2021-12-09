@@ -12,7 +12,7 @@ import firebase from '../Firebase/firebase';
 import { app } from "../Firebase/firebase";
 import { getFirestore, collection, addDoc, doc } from 'firebase/firestore/lite'
 
-import { Segment } from 'semantic-ui-react';
+import { Segment, Radio, Header } from 'semantic-ui-react';
 
 import '../styles/Home.css';
 
@@ -25,6 +25,8 @@ const Home = (props) => {
   const [user, setUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [filterParams, setFilterParams] = useState({});
+  const [showMore, setShowMore] = useState(false);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
@@ -41,16 +43,27 @@ const Home = (props) => {
 
   const fetchUsers = async (n) => {
     setIsLoading(true);
-    const usersData = await getNRandomUsers(n);
+    const usersData = await getNRandomUsers(n, filterParams);
     setUsers(usersData.data.results);
     setIsLoading(false);
   }
 
   const fetchNMoreUsers = async (n) => {
-    const usersData = await getNRandomUsers(n);
+    const usersData = await getNRandomUsers(n, filterParams);
     const newUsers = [...users, ...usersData.data.results];
     setUsers(newUsers);
     setIsLoading(false);
+  }
+
+  const fetchWithFilters = async (n, params) => {
+    setFilterParams(params);
+    setUsers([]);
+    if (!isLoading) {
+      setIsLoading(true);
+      const usersData = await getNRandomUsers(n, params);
+      setUsers(usersData.data.results);
+      setIsLoading(false);
+    }
   }
 
   const saveUser = async (data) => {
@@ -78,13 +91,28 @@ const Home = (props) => {
     }
   }
 
+  const toggleShowMore = () => {
+    setShowMore(!showMore);
+  }
+
   return (
     <Segment className="home" onScroll={checkIfBottom}>
       <Navbar />
-      <Filter />
+      <Filter
+        fetchWithFilters={fetchWithFilters}
+        parent="home" />
+      <Segment className="show-more-container">
+        <h4>Show more details</h4>
+        <Radio toggle
+          checked={showMore}
+          onChange={toggleShowMore} />
+      </Segment>
       <div className="usercard-container">
         {users && users.map((user, index) => (
-          <UserCard key={index} data={user} saveUser={saveUser} />
+          <UserCard key={index}
+            data={user}
+            saveUser={saveUser}
+            showMore={showMore} />
         ))}
       </div>
       {isLoading ? <Spinner /> : <></>}
