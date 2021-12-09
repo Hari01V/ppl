@@ -13,7 +13,7 @@ const getNRandomUsers = (n, filterParams) => {
     url += `&${key}=${value}`;
   }
   url = `&results=${n}${url}`;
-  console.log(BASE_URL + url);
+  // console.log(BASE_URL + url);
 
   return api.get(url);
 }

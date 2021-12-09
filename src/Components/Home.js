@@ -36,6 +36,7 @@ const Home = (props) => {
           fetchUsers(FETCH_SIZE);
         }
       } else {
+        console.log('Navigating to Login Page');
         navigate('/login');
       }
     });
